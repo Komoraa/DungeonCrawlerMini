@@ -26,10 +26,12 @@ public static class GameStateMapper
 
         state.CurrentRoom = (Room)(from room in state.Dungeon.Rooms where room.Id == dto.CurrentRoom select room).First();
 
-        foreach (var room in dto.VisitedRooms)
-        {
-            
-        }
+        var visitedRooms = from room in state.Dungeon.Rooms
+                           from roomId in dto.VisitedRooms
+                           where room.Id == roomId
+                           select room;
+
+        foreach (var room in visitedRooms) state.VisitedRooms.Add((Room)room);
 
         return state;
     }

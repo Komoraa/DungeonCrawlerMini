@@ -1,4 +1,5 @@
-﻿using Characters;
+﻿using Actions;
+using Characters;
 using Core;
 using Core.Enums;
 using Core.Structs;
@@ -7,6 +8,7 @@ using Game;
 using Game.Dtos;
 using Game.Mappers;
 using System.Text.Json;
+using System.Xml.Serialization;
 
 namespace Tests;
 
@@ -65,19 +67,29 @@ internal class Program
 
         Console.WriteLine(dungeon);
 
-        string fileName = "Fighter.json";
-        string jsonString = JsonSerializer.Serialize(room1.ToDto());
-        File.WriteAllText(fileName, jsonString);
+        var state = new GameState
+        {
+            Player = fighter,
+            Dungeon = dungeon,
+            CurrentRoom = room1,
+            VisitedRooms = [room1]
+        };
 
-        string jsonStringFromFile = File.ReadAllText(fileName);
+        fighter.TryAddInnate(new Attack { AttackRoll = attackRoll });
 
-        var roomDto = JsonSerializer.Deserialize<RoomDto>(jsonStringFromFile);
+        string file = "save.json";
+        File.WriteAllText(file, JsonSerializer.Serialize(state.ToDto()));
+        string json = File.ReadAllText(file);
+        
+        Console.WriteLine(json);
 
-        Console.WriteLine();
-        Console.WriteLine(roomDto?.ToEntity());
+        var loaded = JsonSerializer.Deserialize<GameStateDto>(json)!.ToEntity();
+        Console.WriteLine(loaded.Player);
+        Console.WriteLine(loaded.Dungeon);
+        Console.WriteLine(loaded.CurrentRoom);
 
-        File.WriteAllText(fileName, JsonSerializer.Serialize(dungeon.ToDto()));
-        Console.WriteLine();
-        Console.WriteLine(File.ReadAllText(fileName));
+        
+
+
     }
 }
