@@ -1,4 +1,5 @@
-﻿using Game.Dtos;
+﻿using Actions;
+using Game.Dtos;
 using Items;
 
 namespace Game.Mappers;
@@ -12,8 +13,8 @@ public static class WeaponMapper
             Id = weapon.Id,
             Name = weapon.Name,
             Description = weapon.Description,
-            Value = weapon.Value,
-            Attacks = [.. weapon.Attacks]
+            Value = weapon.Value.ToDto(),
+            Attacks = [.. from attack in weapon.Attacks select ((Attack)attack).ToDto()],
         };
     }
 
@@ -24,10 +25,10 @@ public static class WeaponMapper
             Id = dto.Id,
             Name = dto.Name,
             Description = dto.Description,
-            Value = dto.Value,
+            Value = dto.Value!.ToEntity(),
         };
 
-        foreach (var attack in dto.Attacks) weapon.TryAdd(attack);
+        foreach (var attack in dto.Attacks) weapon.TryAdd(attack.ToEntity());
 
         return weapon;
     }

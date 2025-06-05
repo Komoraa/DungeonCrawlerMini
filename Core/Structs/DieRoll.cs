@@ -2,26 +2,27 @@
 
 public struct DieRoll
 {
-    public IDie Die { get; set; }
+    public Die Die { get; set; }
     public int Amount { get; set; }
     public int Result { get; private set; }
 
-    public DieRoll(IDie die, int amount)
+    public DieRoll() { }
+    public DieRoll(Die die, int amount)
     {
         Die = die;
         Amount = amount;
         Roll();
     }
 
-    public override string ToString()
+    public override readonly string ToString()
     {
         return $"{Amount}{Die.DieSize}";
     }
-    public override int GetHashCode()
+    public override readonly int GetHashCode()
     {
         return ToString().GetHashCode();
     }
-    public override bool Equals(object? obj)
+    public override readonly bool Equals(object? obj)
     {
         return ToString().Equals(obj?.ToString());
     }

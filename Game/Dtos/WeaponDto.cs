@@ -1,8 +1,6 @@
-﻿using Core;
-
-namespace Game.Dtos;
+﻿namespace Game.Dtos;
 
 public class WeaponDto : ItemDto
 {
-    public List<IAttack> Attacks { get; set; } = [];
+    public List<AttackDto> Attacks { get; set; } = [];
 }

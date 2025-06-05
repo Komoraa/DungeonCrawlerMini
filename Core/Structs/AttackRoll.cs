@@ -4,7 +4,7 @@ public struct AttackRoll
 {
     public int Base { get; set; }
     public int Rolled { get; private set; }
-    public int Result => Base + Rolled;
+    public readonly int Result => Base + Rolled;
 
     public List<DieRoll> DieRolls { get; } = [];
 

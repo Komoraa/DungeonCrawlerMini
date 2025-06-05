@@ -12,7 +12,7 @@ public static class ItemMapper
             Id = item.Id,
             Name = item.Name,
             Description = item.Description,
-            Value = item.Value,
+            Value = item.Value.ToDto(),
         };
     }
 
@@ -23,7 +23,7 @@ public static class ItemMapper
             Id = dto.Id,
             Name = dto.Name!,
             Description = dto.Description!,
-            Value = dto.Value,
+            Value = dto.Value!.ToEntity(),
         };
     }
 }

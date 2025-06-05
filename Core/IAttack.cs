@@ -8,8 +8,6 @@ public interface IAttack
     string? Name { get; }
     string? Description { get; }
 
-    bool IsValid { get; }
-
     AttackRoll? AttackRoll { get; }
     DamageRoll? DamageRoll { get; }
 

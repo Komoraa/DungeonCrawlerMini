@@ -8,7 +8,6 @@ using Game;
 using Game.Dtos;
 using Game.Mappers;
 using System.Text.Json;
-using System.Xml.Serialization;
 
 namespace Tests;
 
@@ -88,7 +87,7 @@ internal class Program
         Console.WriteLine(loaded.Dungeon);
         Console.WriteLine(loaded.CurrentRoom);
 
-        
+        Console.WriteLine(loaded.Player!.Attacks[0].AttackRoll?.DieRolls[0]);
 
 
     }

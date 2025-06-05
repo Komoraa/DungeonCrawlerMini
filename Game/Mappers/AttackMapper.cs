@@ -12,8 +12,8 @@ public static class AttackMapper
             Id = attack.Id,
             Name = attack.Name,
             Description = attack.Description,
-            AttackRoll = attack.AttackRoll,
-            DamageRoll = attack.DamageRoll,
+            AttackRoll = attack.AttackRoll?.ToDto(),
+            DamageRoll = attack.DamageRoll?.ToDto(),
         };
     }
 
@@ -24,8 +24,8 @@ public static class AttackMapper
             Id = dto.Id,
             Name = dto.Name,
             Description = dto.Description,
-            AttackRoll = dto.AttackRoll,
-            DamageRoll = dto.DamageRoll,
+            AttackRoll = dto.AttackRoll?.ToEntity(),
+            DamageRoll = dto.DamageRoll?.ToEntity(),
         };
     }
 }

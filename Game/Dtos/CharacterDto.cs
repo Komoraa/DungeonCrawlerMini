@@ -1,6 +1,4 @@
-﻿using Core.Structs;
-
-namespace Game.Dtos;
+﻿namespace Game.Dtos;
 
 public class CharacterDto
 {
@@ -22,7 +20,7 @@ public class CharacterDto
     public int Health { get; set; }
 
     public List<ItemDto> Inventory { get; set; } = [];
-    public Money Money { get; set; }
+    public MoneyDto Money { get; set; }
 
     public List<AttackDto> InnateAttacks { get; set; } = [];
     

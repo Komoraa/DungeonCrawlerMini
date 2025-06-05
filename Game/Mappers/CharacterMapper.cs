@@ -25,7 +25,7 @@ public static class CharacterMapper
             MaxHealth = character.MaxHealth,
             Health = character.Health,
             Inventory = [.. from item in character.Inventory select ((Item)item).ToDto()],
-            Money = character.Money,
+            Money = character.Money.ToDto(),
             InnateAttacks = [.. from attack in character.InnateAttacks select ((Attack)attack).ToDto()]
         };
 
@@ -52,7 +52,7 @@ public static class CharacterMapper
             MaxHealthPerLevel = dto.MaxHealthPerLevel,
             MaxHealth = dto.MaxHealth,
             Health = dto.Health,
-            Money = dto.Money
+            Money = dto.Money.ToEntity(),
         };
 
         if (dto.Weapon is not null) character.Weapon = dto.Weapon.ToEntity();
