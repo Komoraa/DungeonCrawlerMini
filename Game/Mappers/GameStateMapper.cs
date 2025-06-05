@@ -20,13 +20,13 @@ public static class GameStateMapper
     {
         var state = new GameState
         {
-            Player = dto.Player!.ToEntity(),
-            Dungeon = dto.Dungeon!.ToEntity(),
+            Player = dto.Player?.ToEntity(),
+            Dungeon = dto.Dungeon?.ToEntity(),
         };
 
-        state.CurrentRoom = (Room)(from room in state.Dungeon.Rooms where room.Id == dto.CurrentRoom select room).First();
+        state.CurrentRoom = (Room)(from room in state.Dungeon?.Rooms where room.Id == dto.CurrentRoom select room).First();
 
-        var visitedRooms = from room in state.Dungeon.Rooms
+        var visitedRooms = from room in state.Dungeon?.Rooms
                            from roomId in dto.VisitedRooms
                            where room.Id == roomId
                            select room;

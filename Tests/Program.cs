@@ -82,7 +82,7 @@ internal class Program
         
         Console.WriteLine(json);
 
-        var loaded = JsonSerializer.Deserialize<GameStateDto>(json)!.ToEntity();
+        var loaded = JsonSerializer.Deserialize<GameStateDto>(file)!.ToEntity();
         Console.WriteLine(loaded.Player);
         Console.WriteLine(loaded.Dungeon);
         Console.WriteLine(loaded.CurrentRoom);

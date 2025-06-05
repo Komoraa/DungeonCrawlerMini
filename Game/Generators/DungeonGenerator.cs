@@ -1,5 +1,11 @@
-﻿namespace Game.Generators;
+﻿using Dungeons;
 
-public class DungeonGenerator
+namespace Game.Generators;
+
+public static class DungeonGenerator
 {
+    public static Dungeon GenerateDungeon()
+    {
+        return new();
+    }
 }

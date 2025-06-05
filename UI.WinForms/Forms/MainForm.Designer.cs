@@ -28,12 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "MainForm";
+            panel1 = new Panel();
+            ButtonNewGame = new Button();
+            ButtonContinue = new Button();
+            panel1.SuspendLayout();
+            SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(ButtonNewGame);
+            panel1.Controls.Add(ButtonContinue);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(304, 141);
+            panel1.TabIndex = 0;
+            // 
+            // ButtonNewGame
+            // 
+            ButtonNewGame.Location = new Point(12, 41);
+            ButtonNewGame.Name = "ButtonNewGame";
+            ButtonNewGame.Size = new Size(75, 23);
+            ButtonNewGame.TabIndex = 2;
+            ButtonNewGame.Text = "New Game";
+            ButtonNewGame.UseVisualStyleBackColor = true;
+            ButtonNewGame.Click += ButtonNewGame_Click;
+            // 
+            // ButtonContinue
+            // 
+            ButtonContinue.Location = new Point(12, 12);
+            ButtonContinue.Name = "ButtonContinue";
+            ButtonContinue.Size = new Size(75, 23);
+            ButtonContinue.TabIndex = 1;
+            ButtonContinue.Text = "Continue";
+            ButtonContinue.UseVisualStyleBackColor = true;
+            ButtonContinue.Click += ButtonContinue_Click;
+            // 
+            // MainForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            ClientSize = new Size(304, 141);
+            Controls.Add(panel1);
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Dungeon Crawler";
+            panel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel panel1;
+        private Button ButtonContinue;
+        private Button ButtonNewGame;
     }
 }

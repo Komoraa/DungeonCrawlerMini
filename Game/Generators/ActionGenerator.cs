@@ -1,5 +1,11 @@
-﻿namespace Game.Generators;
+﻿using Actions;
 
-public class ActionGenerator
+namespace Game.Generators;
+
+public static class ActionGenerator
 {
+    public static Attack GenerateAttack()
+    {
+        return new();
+    }
 }
