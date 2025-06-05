@@ -191,19 +191,11 @@ public class Character : ICharacter
 
     public void Init()
     {
-        if (OnInit?.GetInvocationList().Length <= 1)
-        {
-            throw new UndefinedOnInitEventHandlerException(this);
-        }
         OnInit?.Invoke(this, EventArgs.Empty);
     }
 
     public void LevelUp()
     {
-        if (OnInit?.GetInvocationList().Length <= 1)
-        {
-            throw new UndefinedOnInitEventHandlerException(this);
-        }
         OnLevelUp?.Invoke(this, EventArgs.Empty);
     }
     public void GrantExperience(int amount)
