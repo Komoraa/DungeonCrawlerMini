@@ -4,33 +4,31 @@ namespace Core;
 
 public interface ICharacter
 {
-    Guid Id { get; }
-    string? Name { get; }
-    string? Description { get; }
+    Guid Id { get; set; }
+    string? Name { get; set; }
+    string? Description { get; set; }
 
-    int Level { get; }
-    int Experience { get; }
+    int Level { get; set; }
+    int Experience { get; set; }
 
-    int Strength { get; }
-    int Dexterity { get; }
-    int Intelligence { get; }
-    int Perception { get; }
+    int Strength { get; set; }
+    int Dexterity { get; set; }
+    int Intelligence { get; set; }
+    int Perception { get; set; }
 
     int MaxHealth { get; }
-    int Health { get; }
+    int Health { get; set; }
     bool IsConscious { get; }
 
     IReadOnlyList<IItem> Inventory { get; }
-    Money Money { get; }
+    Money Money { get; set; }
 
     IReadOnlyList<IAttack> InnateAttacks { get; }
     IReadOnlyList<IAttack> Attacks { get; }
-    IWeapon? Weapon { get; }
-    IArmor? Armor { get; }
+    IWeapon? Weapon { get; set; }
+    IArmor? Armor { get; set; }
     int ArmorClass { get; }
-    int Speed { get; }
-
-    void Init();
+    int Speed { get; set; }
 
     void LevelUp();
     void GrantExperience(int amount);
@@ -47,6 +45,8 @@ public interface ICharacter
     bool TryEquip(IItem item);
     void Unequip(IItem item);
     bool TryUnequip(IItem item);
+    void Use(IItem item);
+    bool TryUse(IItem item);
 
     bool Has(IAttack attack);
     bool HasInnate(IAttack attack);

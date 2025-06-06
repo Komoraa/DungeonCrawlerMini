@@ -4,7 +4,7 @@ using Core.Structs;
 
 namespace Characters;
 
-public class Character : ICharacter
+public class Character : ICharacter, IEquatable<Character>
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string? Name
@@ -157,13 +157,6 @@ public class Character : ICharacter
         }
     }
 
-    public event EventHandler? OnInit = delegate (object? sender, EventArgs e)
-    {
-        if (sender is Character character)
-        {
-            character.Level = 1;
-        }
-    };
     public event EventHandler? OnLevelUp = delegate (object? sender, EventArgs e)
     {
         if (sender is Character character)
@@ -189,9 +182,17 @@ public class Character : ICharacter
         return ToString().Equals(obj?.ToString());
     }
 
-    public void Init()
+    public bool Equals(Character? other)
     {
-        OnInit?.Invoke(this, EventArgs.Empty);
+        return Id == other?.Id;
+    }
+    public static bool operator ==(Character left, Character right)
+    {
+        return left.Id == right.Id;
+    }
+    public static bool operator !=(Character left, Character right)
+    {
+        return left.Id != right.Id;
     }
 
     public void LevelUp()
@@ -346,6 +347,39 @@ public class Character : ICharacter
             return false;
         }
         catch (CannotUnequipItemException)
+        {
+            return false;
+        }
+    }
+    public void Use(IItem item)
+    {
+        if (!Has(item))
+        {
+            throw new ItemNotInInventoryException(this, item);
+        }
+        if (item is not IPotion potion)
+        {
+            throw new ItemNotUsableException(this, item);
+        }
+
+        var missingHealth = MaxHealth - Health;
+        var healAmount = Math.Min(potion.HealthGain, missingHealth);
+
+        Health += healAmount;
+        potion.HealthGain -= healAmount;
+    }
+    public bool TryUse(IItem item)
+    {
+        try
+        {
+            Use(item);
+            return true;
+        }
+        catch (ItemNotInInventoryException)
+        {
+            return false;
+        }
+        catch (ItemNotUsableException)
         {
             return false;
         }

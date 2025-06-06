@@ -2,7 +2,7 @@
 
 public interface IArmor : IItem
 {
-    int ArmorClass { get; }
-    int SpeedAdjustment { get; }
-    int? DexterityCap { get; }
+    int ArmorClass { get; set; }
+    int SpeedAdjustment { get; set; }
+    int? DexterityCap { get; set; }
 }

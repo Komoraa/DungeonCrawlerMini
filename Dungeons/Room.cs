@@ -3,7 +3,7 @@ using Dungeons.Exceptions;
 
 namespace Dungeons;
 
-public class Room : IRoom
+public class Room : IRoom, IEquatable<Room>
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string? Name
@@ -54,6 +54,19 @@ public class Room : IRoom
     public override bool Equals(object? obj)
     {
         return ToString().Equals(obj?.ToString());
+    }
+
+    public bool Equals(Room? other)
+    {
+        return Id == other?.Id;
+    }
+    public static bool operator ==(Room left, Room right)
+    {
+        return left.Id == right.Id;
+    }
+    public static bool operator !=(Room left, Room right)
+    {
+        return left.Id != right.Id;
     }
 
     public bool Has(IItem item)

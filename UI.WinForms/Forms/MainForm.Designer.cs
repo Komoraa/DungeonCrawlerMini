@@ -28,21 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            Panel = new Panel();
             ButtonNewGame = new Button();
             ButtonContinue = new Button();
-            panel1.SuspendLayout();
+            LabelContinue = new Label();
+            LabelNewGame = new Label();
+            Panel.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // Panel
             // 
-            panel1.Controls.Add(ButtonNewGame);
-            panel1.Controls.Add(ButtonContinue);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(304, 141);
-            panel1.TabIndex = 0;
+            Panel.Controls.Add(LabelNewGame);
+            Panel.Controls.Add(LabelContinue);
+            Panel.Controls.Add(ButtonNewGame);
+            Panel.Controls.Add(ButtonContinue);
+            Panel.Dock = DockStyle.Fill;
+            Panel.Location = new Point(0, 0);
+            Panel.Name = "Panel";
+            Panel.Size = new Size(304, 141);
+            Panel.TabIndex = 0;
             // 
             // ButtonNewGame
             // 
@@ -64,24 +68,45 @@
             ButtonContinue.UseVisualStyleBackColor = true;
             ButtonContinue.Click += ButtonContinue_Click;
             // 
+            // LabelContinue
+            // 
+            LabelContinue.AutoSize = true;
+            LabelContinue.Location = new Point(93, 16);
+            LabelContinue.Name = "LabelContinue";
+            LabelContinue.Size = new Size(38, 15);
+            LabelContinue.TabIndex = 3;
+            LabelContinue.Text = "label1";
+            // 
+            // LabelNewGame
+            // 
+            LabelNewGame.AutoSize = true;
+            LabelNewGame.Location = new Point(93, 45);
+            LabelNewGame.Name = "LabelNewGame";
+            LabelNewGame.Size = new Size(38, 15);
+            LabelNewGame.TabIndex = 4;
+            LabelNewGame.Text = "label1";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             ClientSize = new Size(304, 141);
-            Controls.Add(panel1);
+            Controls.Add(Panel);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dungeon Crawler";
-            panel1.ResumeLayout(false);
+            Panel.ResumeLayout(false);
+            Panel.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private Panel Panel;
         private Button ButtonContinue;
         private Button ButtonNewGame;
+        private Label LabelContinue;
+        private Label LabelNewGame;
     }
 }
