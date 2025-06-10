@@ -31,8 +31,16 @@ public partial class CombatForm : Form
         TextBoxEnemyAC.Text = $"{_enemy.ArmorClass}";
         TextBoxPlayerAC.Text = $"{player.ArmorClass}";
 
-        ButtonAttack.Enabled = true;
-        ButtonItem.Enabled = true;
+        if (_state.Player!.IsConscious)
+        {
+            ButtonAttack.Enabled = true;
+            ButtonItem.Enabled = true;
+        }
+        else
+        {
+            ButtonAttack.Enabled = false;
+            ButtonItem.Enabled = false;
+        }
 
         if (!_enemy.IsConscious || !_state.Player!.IsConscious)
         {
@@ -73,7 +81,7 @@ public partial class CombatForm : Form
 
     private void ButtonEndTurn_Click(object sender, EventArgs e)
     {
-        if (_enemy.IsConscious)
+        if (_enemy.IsConscious && _state.Player!.IsConscious)
         {
             var random = new Random();
             if (_enemy.Attacks.Count > 0)
@@ -86,8 +94,11 @@ public partial class CombatForm : Form
         }
         else
         {
-            _state.Player!.GrantExperience(_enemy.Experience / 10);
-            foreach (var item in _enemy.Inventory) _state.Player!.TryPickUp(item);
+            if (_state.Player!.IsConscious)
+            {
+                _state.Player!.GrantExperience(_enemy.Experience / 10);
+                foreach (var item in _enemy.Inventory) _state.Player!.TryPickUp(item);
+            }
             Close();
         }
     }
