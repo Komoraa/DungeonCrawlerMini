@@ -54,24 +54,9 @@ public static class ItemGenerator
     public static List<Item> GeneratePlayerStartingItems()
     {
         List<Potion> potions = [
-                new Potion
-                {
-                    Name = "Potion",
-                    MaxHealth = 20,
-                    Health = 20,
-                },
-                new Potion
-                {
-                    Name = "Potion",
-                    MaxHealth = 20,
-                    Health = 20,
-                },
-                new Potion
-                {
-                    Name = "Potion",
-                    MaxHealth = 20,
-                    Health = 20,
-                },
+            GeneratePotion(),
+            GeneratePotion(),
+            GeneratePotion()
             ];
 
         Weapon weapon = GenerateWeapon();
