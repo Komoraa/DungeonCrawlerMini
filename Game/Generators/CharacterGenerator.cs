@@ -12,10 +12,10 @@ public static class CharacterGenerator
 
             Level = 1,
             Experience = 0,
-            Strength = 12,
-            Dexterity = 8,
-            Intelligence = 8,
-            Perception = 10,
+            Strength = 6,
+            Dexterity = 3,
+            Intelligence = 2,
+            Perception = 4,
 
             MaxHealth = 50,
             Health = 50,

@@ -23,6 +23,8 @@ public class Room : IRoom, IEquatable<Room>
         }
     } = nameof(Room);
 
+    public bool Visited { get; set; }
+
     protected List<ICharacter> _enemies = [];
     public IReadOnlyList<ICharacter> Enemies
     {
@@ -43,7 +45,8 @@ public class Room : IRoom, IEquatable<Room>
 
     public override string ToString()
     {
-        return $"Room named {Name}";
+        if (Visited) return $"{Name} (Visited)";
+        return $"{Name}";
     }
 
     public bool Equals(Room? other)

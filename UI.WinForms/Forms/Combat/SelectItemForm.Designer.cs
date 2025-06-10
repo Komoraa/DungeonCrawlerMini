@@ -38,7 +38,7 @@
             ListBoxInventory.FormattingEnabled = true;
             ListBoxInventory.Location = new Point(93, 12);
             ListBoxInventory.Name = "ListBoxInventory";
-            ListBoxInventory.Size = new Size(204, 259);
+            ListBoxInventory.Size = new Size(259, 259);
             ListBoxInventory.TabIndex = 0;
             // 
             // ButtonConfirm
@@ -49,6 +49,7 @@
             ButtonConfirm.TabIndex = 1;
             ButtonConfirm.Text = "Confirm";
             ButtonConfirm.UseVisualStyleBackColor = true;
+            ButtonConfirm.Click += ButtonConfirm_Click;
             // 
             // ButtonCancel
             // 
@@ -58,18 +59,20 @@
             ButtonCancel.TabIndex = 2;
             ButtonCancel.Text = "Cancel";
             ButtonCancel.UseVisualStyleBackColor = true;
+            ButtonCancel.Click += ButtonCancel_Click;
             // 
             // SelectItemForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(309, 286);
+            ClientSize = new Size(364, 286);
             Controls.Add(ButtonCancel);
             Controls.Add(ButtonConfirm);
             Controls.Add(ListBoxInventory);
             Name = "SelectItemForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Choose an Item";
+            Load += SelectItemForm_Load;
             ResumeLayout(false);
         }
 

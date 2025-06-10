@@ -41,6 +41,7 @@
             ButtonConfirm.TabIndex = 0;
             ButtonConfirm.Text = "Confirm";
             ButtonConfirm.UseVisualStyleBackColor = true;
+            ButtonConfirm.Click += ButtonConfirm_Click;
             // 
             // ButtonCancel
             // 
@@ -50,26 +51,28 @@
             ButtonCancel.TabIndex = 1;
             ButtonCancel.Text = "Cancel";
             ButtonCancel.UseVisualStyleBackColor = true;
+            ButtonCancel.Click += ButtonCancel_Click;
             // 
             // ListBoxAttacks
             // 
             ListBoxAttacks.FormattingEnabled = true;
             ListBoxAttacks.Location = new Point(93, 12);
             ListBoxAttacks.Name = "ListBoxAttacks";
-            ListBoxAttacks.Size = new Size(204, 259);
+            ListBoxAttacks.Size = new Size(270, 259);
             ListBoxAttacks.TabIndex = 2;
             // 
             // SelectAttackForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(309, 286);
+            ClientSize = new Size(375, 286);
             Controls.Add(ListBoxAttacks);
             Controls.Add(ButtonCancel);
             Controls.Add(ButtonConfirm);
             Name = "SelectAttackForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Choose an Attack";
+            Load += SelectAttackForm_Load;
             ResumeLayout(false);
         }
 

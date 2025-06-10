@@ -6,6 +6,8 @@ public interface IRoom
     string? Name { get; set; }
     string? Description { get; set; }
 
+    bool Visited { get; set; }
+
     IReadOnlyList<ICharacter> Enemies { get; }
     IReadOnlyList<IItem> Items { get; }
 

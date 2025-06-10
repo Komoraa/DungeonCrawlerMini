@@ -21,7 +21,7 @@ public struct DamageRoll
                     orderby roll.Die.DieSize ascending, roll.Amount descending
                     select $"{roll.Result} ({roll})";
 
-        return $"{Base} + [{string.Join(", ", DieRolls)}]";
+        return $"{string.Join(" + ", DieRolls)}";
     }
     public override int GetHashCode()
     {

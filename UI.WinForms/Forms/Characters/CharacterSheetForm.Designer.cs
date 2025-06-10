@@ -1,4 +1,4 @@
-﻿namespace UI.WinForms.Forms
+﻿namespace UI.WinForms.Forms.Characters
 {
     partial class CharacterSheetForm
     {
@@ -88,7 +88,7 @@
             ListBoxInventory.Name = "ListBoxInventory";
             ListBoxInventory.Size = new Size(237, 274);
             ListBoxInventory.TabIndex = 3;
-            ListBoxInventory.SelectedValueChanged += ListBoxInventory_SelectedValueChanged;
+            ListBoxInventory.SelectedIndexChanged += ListBoxInventory_SelectedIndexChanged;
             // 
             // GroupBoxGeneral
             // 

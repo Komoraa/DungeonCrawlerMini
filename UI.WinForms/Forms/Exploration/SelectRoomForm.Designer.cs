@@ -49,6 +49,7 @@ partial class SelectRoomForm
         ButtonCancel.TabIndex = 4;
         ButtonCancel.Text = "Cancel";
         ButtonCancel.UseVisualStyleBackColor = true;
+        ButtonCancel.Click += ButtonCancel_Click;
         // 
         // ButtonConfirm
         // 
@@ -58,6 +59,7 @@ partial class SelectRoomForm
         ButtonConfirm.TabIndex = 3;
         ButtonConfirm.Text = "Confirm";
         ButtonConfirm.UseVisualStyleBackColor = true;
+        ButtonConfirm.Click += ButtonConfirm_Click;
         // 
         // SelectRoomForm
         // 
@@ -68,7 +70,9 @@ partial class SelectRoomForm
         Controls.Add(ButtonCancel);
         Controls.Add(ButtonConfirm);
         Name = "SelectRoomForm";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "Go Where?";
+        Load += SelectRoomForm_Load;
         ResumeLayout(false);
     }
 

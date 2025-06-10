@@ -48,7 +48,7 @@ public class Dungeon : IDungeon, IEquatable<Dungeon>
 
     public override string ToString()
     {
-        return $"Dungeon named {Name}";
+        return $"{Name}";
     }
 
     public bool Equals(Dungeon? other)

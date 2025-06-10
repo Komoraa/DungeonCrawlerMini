@@ -12,7 +12,6 @@ public static class GameStateMapper
             Player = state.Player?.ToDto(),
             Dungeon = state.Dungeon?.ToDto(),
             CurrentRoom = state.CurrentRoom!.Id,
-            VisitedRooms = [.. from room in state.VisitedRooms select room.Id]
         };
     }
 
@@ -20,18 +19,11 @@ public static class GameStateMapper
     {
         var state = new GameState
         {
-            Player = dto.Player?.ToEntity(),
-            Dungeon = dto.Dungeon?.ToEntity(),
+            Player = dto.Player is null ? null : dto.Player.ToEntity(),
+            Dungeon = dto.Dungeon is null ? null : dto.Dungeon.ToEntity(),
         };
 
         state.CurrentRoom = (Room)(from room in state.Dungeon?.Rooms where room.Id == dto.CurrentRoom select room).First();
-
-        var visitedRooms = from room in state.Dungeon?.Rooms
-                           from roomId in dto.VisitedRooms
-                           where room.Id == roomId
-                           select room;
-
-        foreach (var room in visitedRooms) state.VisitedRooms.Add((Room)room);
 
         return state;
     }

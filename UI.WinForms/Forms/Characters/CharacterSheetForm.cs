@@ -3,7 +3,7 @@ using Items;
 using UI.WinForms.Forms.Exploration;
 using UI.WinForms.Forms.Exploration.InspectItem;
 
-namespace UI.WinForms.Forms;
+namespace UI.WinForms.Forms.Characters;
 
 public partial class CharacterSheetForm : Form
 {
@@ -23,7 +23,6 @@ public partial class CharacterSheetForm : Form
     private void ReloadInventory()
     {
         var player = _state.Player!;
-        object? selectedItem = ListBoxInventory.SelectedItem;
 
         TextBoxName.Text = player.Name;
 
@@ -40,15 +39,13 @@ public partial class CharacterSheetForm : Form
 
         ListBoxInventory.Items.Clear();
         ListBoxInventory.Items.AddRange([.. _state.Player!.Inventory]);
-        ListBoxInventory.SelectedItem = selectedItem;
 
-        ButtonUse.Text = "Use";
         ButtonUse.Enabled = false;
         ButtonInspect.Enabled = false;
         ButtonDrop.Enabled = false;
     }
 
-    private void ListBoxInventory_SelectedValueChanged(object sender, EventArgs e)
+    private void ListBoxInventory_SelectedIndexChanged(object sender, EventArgs e)
     {
         if (ListBoxInventory.SelectedIndices.Count != 1)
         {
@@ -72,6 +69,10 @@ public partial class CharacterSheetForm : Form
             {
                 ButtonUse.Text = "Unequip";
             }
+        }
+        else if (selectedItem is Potion || selectedItem is Item)
+        {
+            ButtonUse.Text = "Use";
         }
     }
 

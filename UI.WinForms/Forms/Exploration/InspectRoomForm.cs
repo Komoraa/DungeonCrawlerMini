@@ -20,11 +20,11 @@ public partial class InspectRoomForm : Form
         ListBoxEnemies.Items.AddRange([.. currentRoom.Enemies]);
         ListBoxItems.Items.AddRange([.. currentRoom.Items]);
 
-        var rooms = from map in _state.Dungeon!.ConnectionMap
-                    where (Room)map.Key == currentRoom
-                    select map.Value;
+        var rooms = (from map in _state.Dungeon!.ConnectionMap
+                     where (Room)map.Key == currentRoom
+                     select map.Value).First();
 
-        ListBoxRooms.Items.AddRange([.. rooms.First()]);
+        ListBoxRooms.Items.AddRange([.. rooms]);
     }
 
     private void ButtonBack_Click(object sender, EventArgs e)

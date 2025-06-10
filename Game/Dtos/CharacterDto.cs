@@ -19,7 +19,10 @@ public class CharacterDto
     public int MaxHealth { get; set; }
     public int Health { get; set; }
 
-    public List<ItemDto> Inventory { get; set; } = [];
+    public List<WeaponDto> InventoryWeapons { get; set; } = [];
+    public List<ArmorDto> InventoryArmors { get; set; } = [];
+    public List<PotionDto> InventoryPotions { get; set; } = [];
+    public List<ItemDto> InventoryOther { get; set; } = [];
     public MoneyDto Money { get; set; }
 
     public List<AttackDto> InnateAttacks { get; set; } = [];

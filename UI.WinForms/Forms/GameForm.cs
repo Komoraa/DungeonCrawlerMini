@@ -2,6 +2,7 @@
 using Game.Dtos;
 using Game.Mappers;
 using System.Text.Json;
+using UI.WinForms.Forms.Characters;
 using UI.WinForms.Forms.Combat;
 
 namespace UI.WinForms.Forms;
@@ -73,7 +74,7 @@ public partial class GameForm : Form
         using var openFileDialog = new OpenFileDialog
         {
             Filter = "JSON files (*.json)|*.json",
-            Title = "Load a Save File"
+            Title = "Save to a File"
         };
 
         if (openFileDialog.ShowDialog() == DialogResult.OK)

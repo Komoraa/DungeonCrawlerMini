@@ -28,13 +28,12 @@ partial class CombatForm
     /// </summary>
     private void InitializeComponent()
     {
-        progressBar1 = new ProgressBar();
-        progressBar2 = new ProgressBar();
+        ProgressBarEnemyHealth = new ProgressBar();
+        ProgressBarPlayerHealth = new ProgressBar();
         LabelPlayerHealth = new Label();
         LabelEnemyHealth = new Label();
-        textBox1 = new TextBox();
-        textBox2 = new TextBox();
-        ListBoxRecap = new ListBox();
+        TextBoxEnemyName = new TextBox();
+        TextBoxPlayerName = new TextBox();
         GroupBoxEnemy = new GroupBox();
         TextBoxEnemyAC = new TextBox();
         LabelEnemyAC = new Label();
@@ -44,25 +43,23 @@ partial class CombatForm
         ButtonEndTurn = new Button();
         ButtonItem = new Button();
         ButtonAttack = new Button();
-        GroupBoxRecap = new GroupBox();
         GroupBoxEnemy.SuspendLayout();
         GroupBoxPlayer.SuspendLayout();
-        GroupBoxRecap.SuspendLayout();
         SuspendLayout();
         // 
-        // progressBar1
+        // ProgressBarEnemyHealth
         // 
-        progressBar1.Location = new Point(54, 51);
-        progressBar1.Name = "progressBar1";
-        progressBar1.Size = new Size(100, 23);
-        progressBar1.TabIndex = 0;
+        ProgressBarEnemyHealth.Location = new Point(54, 51);
+        ProgressBarEnemyHealth.Name = "ProgressBarEnemyHealth";
+        ProgressBarEnemyHealth.Size = new Size(100, 23);
+        ProgressBarEnemyHealth.TabIndex = 0;
         // 
-        // progressBar2
+        // ProgressBarPlayerHealth
         // 
-        progressBar2.Location = new Point(54, 51);
-        progressBar2.Name = "progressBar2";
-        progressBar2.Size = new Size(100, 23);
-        progressBar2.TabIndex = 1;
+        ProgressBarPlayerHealth.Location = new Point(54, 51);
+        ProgressBarPlayerHealth.Name = "ProgressBarPlayerHealth";
+        ProgressBarPlayerHealth.Size = new Size(100, 23);
+        ProgressBarPlayerHealth.TabIndex = 1;
         // 
         // LabelPlayerHealth
         // 
@@ -82,36 +79,28 @@ partial class CombatForm
         LabelEnemyHealth.TabIndex = 3;
         LabelEnemyHealth.Text = "Health";
         // 
-        // textBox1
+        // TextBoxEnemyName
         // 
-        textBox1.Location = new Point(6, 22);
-        textBox1.Name = "textBox1";
-        textBox1.ReadOnly = true;
-        textBox1.Size = new Size(148, 23);
-        textBox1.TabIndex = 4;
+        TextBoxEnemyName.Location = new Point(6, 22);
+        TextBoxEnemyName.Name = "TextBoxEnemyName";
+        TextBoxEnemyName.ReadOnly = true;
+        TextBoxEnemyName.Size = new Size(148, 23);
+        TextBoxEnemyName.TabIndex = 4;
         // 
-        // textBox2
+        // TextBoxPlayerName
         // 
-        textBox2.Location = new Point(6, 22);
-        textBox2.Name = "textBox2";
-        textBox2.ReadOnly = true;
-        textBox2.Size = new Size(148, 23);
-        textBox2.TabIndex = 5;
-        // 
-        // ListBoxRecap
-        // 
-        ListBoxRecap.FormattingEnabled = true;
-        ListBoxRecap.Location = new Point(6, 22);
-        ListBoxRecap.Name = "ListBoxRecap";
-        ListBoxRecap.Size = new Size(219, 304);
-        ListBoxRecap.TabIndex = 6;
+        TextBoxPlayerName.Location = new Point(6, 22);
+        TextBoxPlayerName.Name = "TextBoxPlayerName";
+        TextBoxPlayerName.ReadOnly = true;
+        TextBoxPlayerName.Size = new Size(148, 23);
+        TextBoxPlayerName.TabIndex = 5;
         // 
         // GroupBoxEnemy
         // 
         GroupBoxEnemy.Controls.Add(TextBoxEnemyAC);
         GroupBoxEnemy.Controls.Add(LabelEnemyAC);
-        GroupBoxEnemy.Controls.Add(textBox1);
-        GroupBoxEnemy.Controls.Add(progressBar1);
+        GroupBoxEnemy.Controls.Add(TextBoxEnemyName);
+        GroupBoxEnemy.Controls.Add(ProgressBarEnemyHealth);
         GroupBoxEnemy.Controls.Add(LabelEnemyHealth);
         GroupBoxEnemy.Location = new Point(12, 12);
         GroupBoxEnemy.Name = "GroupBoxEnemy";
@@ -144,12 +133,12 @@ partial class CombatForm
         GroupBoxPlayer.Controls.Add(ButtonEndTurn);
         GroupBoxPlayer.Controls.Add(ButtonItem);
         GroupBoxPlayer.Controls.Add(ButtonAttack);
-        GroupBoxPlayer.Controls.Add(textBox2);
-        GroupBoxPlayer.Controls.Add(progressBar2);
+        GroupBoxPlayer.Controls.Add(TextBoxPlayerName);
+        GroupBoxPlayer.Controls.Add(ProgressBarPlayerHealth);
         GroupBoxPlayer.Controls.Add(LabelPlayerHealth);
-        GroupBoxPlayer.Location = new Point(12, 139);
+        GroupBoxPlayer.Location = new Point(243, 12);
         GroupBoxPlayer.Name = "GroupBoxPlayer";
-        GroupBoxPlayer.Size = new Size(168, 212);
+        GroupBoxPlayer.Size = new Size(185, 212);
         GroupBoxPlayer.TabIndex = 8;
         GroupBoxPlayer.TabStop = false;
         GroupBoxPlayer.Text = "You";
@@ -173,72 +162,63 @@ partial class CombatForm
         // 
         // ButtonEndTurn
         // 
-        ButtonEndTurn.Location = new Point(6, 183);
+        ButtonEndTurn.AutoSize = true;
+        ButtonEndTurn.Location = new Point(87, 181);
         ButtonEndTurn.Name = "ButtonEndTurn";
-        ButtonEndTurn.Size = new Size(75, 23);
+        ButtonEndTurn.Size = new Size(75, 25);
         ButtonEndTurn.TabIndex = 8;
         ButtonEndTurn.Text = "End Turn";
         ButtonEndTurn.UseVisualStyleBackColor = true;
+        ButtonEndTurn.Click += ButtonEndTurn_Click;
         // 
         // ButtonItem
         // 
-        ButtonItem.Location = new Point(6, 154);
+        ButtonItem.Location = new Point(6, 183);
         ButtonItem.Name = "ButtonItem";
         ButtonItem.Size = new Size(75, 23);
         ButtonItem.TabIndex = 7;
         ButtonItem.Text = "Item";
         ButtonItem.UseVisualStyleBackColor = true;
+        ButtonItem.Click += ButtonItem_Click;
         // 
         // ButtonAttack
         // 
-        ButtonAttack.Location = new Point(6, 125);
+        ButtonAttack.Location = new Point(6, 154);
         ButtonAttack.Name = "ButtonAttack";
         ButtonAttack.Size = new Size(75, 23);
         ButtonAttack.TabIndex = 6;
         ButtonAttack.Text = "Attack";
         ButtonAttack.UseVisualStyleBackColor = true;
-        // 
-        // GroupBoxRecap
-        // 
-        GroupBoxRecap.Controls.Add(ListBoxRecap);
-        GroupBoxRecap.Location = new Point(186, 12);
-        GroupBoxRecap.Name = "GroupBoxRecap";
-        GroupBoxRecap.Size = new Size(231, 339);
-        GroupBoxRecap.TabIndex = 9;
-        GroupBoxRecap.TabStop = false;
-        GroupBoxRecap.Text = "Recap";
+        ButtonAttack.Click += ButtonAttack_Click;
         // 
         // CombatForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(429, 363);
-        Controls.Add(GroupBoxRecap);
+        ClientSize = new Size(440, 235);
         Controls.Add(GroupBoxPlayer);
         Controls.Add(GroupBoxEnemy);
         Name = "CombatForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Combat";
+        Load += CombatForm_Load;
         GroupBoxEnemy.ResumeLayout(false);
         GroupBoxEnemy.PerformLayout();
         GroupBoxPlayer.ResumeLayout(false);
         GroupBoxPlayer.PerformLayout();
-        GroupBoxRecap.ResumeLayout(false);
         ResumeLayout(false);
     }
 
     #endregion
 
-    private ProgressBar progressBar1;
-    private ProgressBar progressBar2;
+    private ProgressBar ProgressBarEnemyHealth;
+    private ProgressBar ProgressBarPlayerHealth;
     private Label LabelPlayerHealth;
     private Label LabelEnemyHealth;
-    private TextBox textBox1;
-    private TextBox textBox2;
-    private ListBox ListBoxRecap;
+    private TextBox TextBoxEnemyName;
+    private TextBox TextBoxPlayerName;
     private GroupBox GroupBoxEnemy;
     private GroupBox GroupBoxPlayer;
-    private GroupBox GroupBoxRecap;
     private Button ButtonEndTurn;
     private Button ButtonItem;
     private Button ButtonAttack;

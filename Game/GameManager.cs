@@ -15,7 +15,6 @@ public class GameManager
         {
             State.Dungeon = DungeonGenerator.GenerateDungeon();
             State.CurrentRoom = (Room)State.Dungeon.Rooms[0];
-            State.VisitedRooms.Add(State.CurrentRoom);
         }
     }
 }

@@ -34,7 +34,6 @@ public partial class MainForm : Form
         if (data.Player is null) throw new Exception(messageCorruptedFile);
         if (data.Dungeon is null) throw new Exception(messageCorruptedFile);
         if (data.CurrentRoom.Equals(0)) throw new Exception(messageCorruptedFile);
-        if (data.VisitedRooms.Count == 0) throw new Exception(messageCorruptedFile);
 
         _save = data;
     }

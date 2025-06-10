@@ -1,4 +1,5 @@
-﻿using Dungeons;
+﻿using Characters;
+using Dungeons;
 
 namespace Game.Generators;
 
@@ -19,7 +20,9 @@ public static class DungeonGenerator
             dungeon.TryConnect(startingRoom, secondRoom);
             rooms.Add(startingRoom);
         }
-        
+
+        secondRoom.TryAdd(new Character { MaxHealth = 20, Health = 19 });
+
         for (int i = 2; i < roomCount; i++)
         {
             var newRoom = RoomGenerator.GenerateRoom();
