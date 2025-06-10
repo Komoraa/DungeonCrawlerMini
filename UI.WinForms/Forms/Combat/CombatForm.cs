@@ -34,7 +34,7 @@ public partial class CombatForm : Form
         ButtonAttack.Enabled = true;
         ButtonItem.Enabled = true;
 
-        if (!_enemy.IsConscious)
+        if (!_enemy.IsConscious || !_state.Player!.IsConscious)
         {
             ButtonEndTurn.Text = "End Combat";
         }
