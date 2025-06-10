@@ -60,14 +60,12 @@ public class Character : ICharacter, IEquatable<Character>
     public int Intelligence { get; set; }
     public int Perception { get; set; }
 
-    public int MaxHealthBase { get; set; }
-    public int MaxHealthPerLevel { get; set; }
     public int MaxHealth
     {
         get;
         set
         {
-            field = Math.Max(value, 0);
+            field = Math.Max(value, 1);
             if (Health > field)
             {
                 Health = field;
@@ -168,18 +166,7 @@ public class Character : ICharacter, IEquatable<Character>
 
     public override string ToString()
     {
-        return $"{Name}, {GetType().Name} {Level} (XP: {Experience}/{ExperienceToNextLevel}), HP: {Health}/{MaxHealth}, AC: {ArmorClass}, " +
-            $"Str: {Strength}, Dex: {Dexterity}, Int: {Intelligence}, Per: {Perception}, " +
-            $"Money: {Money}, Speed: {Speed}, " +
-            $"Weapon: {Weapon?.Name ?? "None"}, Armor: {Armor?.Name ?? "None"}";
-    }
-    public override int GetHashCode()
-    {
-        return ToString().GetHashCode();
-    }
-    public override bool Equals(object? obj)
-    {
-        return ToString().Equals(obj?.ToString());
+        return $"Character named {Name}";
     }
 
     public bool Equals(Character? other)
@@ -363,10 +350,10 @@ public class Character : ICharacter, IEquatable<Character>
         }
 
         var missingHealth = MaxHealth - Health;
-        var healAmount = Math.Min(potion.HealthGain, missingHealth);
+        var healAmount = Math.Min(potion.Health, missingHealth);
 
         Health += healAmount;
-        potion.HealthGain -= healAmount;
+        potion.Health -= healAmount;
     }
     public bool TryUse(IItem item)
     {
@@ -438,6 +425,16 @@ public class Character : ICharacter, IEquatable<Character>
         if (!Has(attack))
         {
             throw new AttackNotAvailableException(this, attack);
+        }
+        if (attack.AttackRoll is AttackRoll atkRoll)
+        {
+            atkRoll.Base = Strength;
+            attack.AttackRoll = atkRoll;
+        }
+        if (attack.DamageRoll is DamageRoll dmgRoll)
+        {
+            dmgRoll.Base = Strength;
+            attack.DamageRoll = dmgRoll;
         }
 
         attack.Roll();

@@ -28,15 +28,7 @@ namespace Items
 
         public override string ToString()
         {
-            return $"{Name}, Worth: {Value}, Description: {Description}";
-        }
-        public override int GetHashCode()
-        {
-            return ToString().GetHashCode();
-        }
-        public override bool Equals(object? obj)
-        {
-            return ToString().Equals(obj?.ToString());
+            return $"Item named {Name} worth {Value}";
         }
 
         public bool Equals(Item? other)

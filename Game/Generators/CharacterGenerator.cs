@@ -6,11 +6,41 @@ public static class CharacterGenerator
 {
     public static Character GeneratePlayer()
     {
-        return new();
+        var player = new Character
+        {
+            Name = "Player",
+
+            Level = 1,
+            Experience = 0,
+            Strength = 12,
+            Dexterity = 8,
+            Intelligence = 8,
+            Perception = 10,
+
+            MaxHealth = 50,
+            Health = 50,
+
+            Money = new(0, 10, 5, 2),
+
+            Speed = 25
+        };
+
+        foreach (var attack in ActionGenerator.GenerateInnatePlayer())
+        {
+            player.TryAddInnate(attack);
+        }
+        foreach (var item in ItemGenerator.GeneratePlayerStartingItems())
+        {
+            player.TryPickUp(item);
+        }
+
+        return player;
     }
 
-    public static Character GenerateEnemy()
+    public static List<Character> GenerateEnemies(params string[] names)
     {
-        return new();
+        List<Character> enemies = [];
+
+        return enemies;
     }
 }

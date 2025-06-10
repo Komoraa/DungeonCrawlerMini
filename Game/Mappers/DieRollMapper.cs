@@ -9,7 +9,7 @@ public static class DieRollMapper
     {
         return new DieRollDto
         {
-            Die = ((Die)roll.Die).ToDto(),
+            Die = roll.Die.ToDto(),
             Amount = roll.Amount
         };
     }

@@ -1,95 +1,103 @@
 ﻿using Game;
 using Game.Dtos;
 using Game.Mappers;
+using System.Text.Json;
+using UI.WinForms.Forms.Combat;
 
 namespace UI.WinForms.Forms;
 
 public partial class GameForm : Form
 {
-    public GameManager game;
+    public readonly GameManager game;
 
     public GameForm(GameStateDto? dto = null)
     {
         InitializeComponent();
-        GameState state;
-        try
-        {
-            state = dto!.ToEntity();
-        }
-        catch
-        {
-            state = new();
-        }
-
-        game = new()
-        {
-            State = state
-        };
-        game.Start();
-    }
-
-    private void ButtonSave_Click(object sender, EventArgs e)
-    {
-
-    }
-    private void ButtonSave_MouseEnter(object sender, EventArgs e)
-    {
-
-    }
-    private void ButtonSave_MouseLeave(object sender, EventArgs e)
-    {
-
+        if (dto is null) game = new();
+        else game = new(dto.ToEntity());
     }
 
     private void ButtonInventory_Click(object sender, EventArgs e)
     {
-
-    }
-    private void ButtonInventory_MouseEnter(object sender, EventArgs e)
-    {
-
-    }
-    private void ButtonInventory_MouseLeave(object sender, EventArgs e)
-    {
-
+        var form = new CharacterSheetForm(game.State);
+        form.Show();
+        form.FormClosed += delegate
+        {
+            Show();
+        };
+        Hide();
     }
 
-    private void ButtonMove_Click(object sender, EventArgs e)
+    private void ButtonSearch_Click(object sender, EventArgs e)
     {
-
-    }
-    private void ButtonMove_MouseEnter(object sender, EventArgs e)
-    {
-
-    }
-    private void ButtonMove_MouseLeave(object sender, EventArgs e)
-    {
-
+        var form = new InspectRoomForm(game.State);
+        form.Show();
+        form.FormClosed += delegate
+        {
+            Show();
+        };
+        Hide();
     }
 
     private void ButtonFight_Click(object sender, EventArgs e)
     {
-
-    }
-    private void ButtonFight_MouseEnter(object sender, EventArgs e)
-    {
-
-    }
-    private void ButtonFight_MouseLeave(object sender, EventArgs e)
-    {
-
+        var form = new SelectEnemyForm(game.State);
+        form.Show();
+        form.FormClosed += delegate
+        {
+            Show();
+        };
+        Hide();
     }
 
-    private void ButtonLoot_Click(object sender, EventArgs e)
+    private void ButtonMove_Click(object sender, EventArgs e)
     {
-
+        var form = new SelectRoomForm(game.State);
+        form.Show();
+        form.FormClosed += delegate
+        {
+            Show();
+        };
+        Hide();
     }
-    private void ButtonLoot_MouseEnter(object sender, EventArgs e)
-    {
 
+    private void Save(string filePath)
+    {
+        var dto = game.State.ToDto();
+        string content = JsonSerializer.Serialize(dto);
+        File.WriteAllText(filePath, content);
     }
-    private void ButtonLoot_MouseLeave(object sender, EventArgs e)
-    {
 
+    private void ButtonSave_Click(object sender, EventArgs e)
+    {
+        using var openFileDialog = new OpenFileDialog
+        {
+            Filter = "JSON files (*.json)|*.json",
+            Title = "Load a Save File"
+        };
+
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            try
+            {
+                string filePath = openFileDialog.FileName;
+
+                Save(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Error loading the save file:\n{ex.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
+        }
+    }
+
+    private void ButtonQuit_Click(object sender, EventArgs e)
+    {
+        Close();
     }
 }

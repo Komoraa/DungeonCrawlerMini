@@ -15,21 +15,13 @@ public struct AttackRoll
         Roll();
     }
 
-    public override string ToString()
+    public override readonly string ToString()
     {
         var rolls = from roll in DieRolls
                     orderby roll.Die.DieSize ascending, roll.Amount descending
                     select $"{roll.Result} ({roll})";
 
-        return $"{Result} ({Base} Base + {Rolled} ({string.Join(" + ", rolls)})), Dice: [{string.Join(", ", DieRolls)}]";
-    }
-    public override int GetHashCode()
-    {
-        return ToString().GetHashCode();
-    }
-    public override bool Equals(object? obj)
-    {
-        return ToString().Equals(obj?.ToString());
+        return $"{Base} + [{string.Join(", ", DieRolls)}]";
     }
 
     public void Roll()

@@ -5,6 +5,7 @@ public struct DieRoll
     public Die Die { get; set; }
     public int Amount { get; set; }
     public int Result { get; private set; }
+    public readonly int MaxValue => Die.MaxValue * Amount;
 
     public DieRoll() { }
     public DieRoll(Die die, int amount)

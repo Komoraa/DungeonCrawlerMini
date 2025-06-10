@@ -43,17 +43,7 @@ public class Room : IRoom, IEquatable<Room>
 
     public override string ToString()
     {
-        string items = string.Join(", ", from item in Items orderby item.Name select item.Name);
-        string characters = string.Join(", ", from character in Enemies orderby character.Name select character.Name);
-        return $"{Name}, Description: {Description}, Enemies: [{characters}], Items: [{items}]";
-    }
-    public override int GetHashCode()
-    {
-        return ToString().GetHashCode();
-    }
-    public override bool Equals(object? obj)
-    {
-        return ToString().Equals(obj?.ToString());
+        return $"Room named {Name}";
     }
 
     public bool Equals(Room? other)

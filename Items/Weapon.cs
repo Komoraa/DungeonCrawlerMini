@@ -16,7 +16,7 @@ public class Weapon : Item, IWeapon
 
     public override string ToString()
     {
-        return $"{base.ToString()} Attacks: [{string.Join(", ", Attacks)}]";
+        return $"Weapon named {Name} worth {Value}";
     }
 
     public bool Has(IAttack attack)

@@ -4,19 +4,25 @@ namespace Items;
 
 public class Potion : Item, IPotion
 {
-    public int HealthGain
+    public int MaxHealth
     {
         get;
         set
         {
-            string empt = " (Empty)";
+            field = Math.Max(value, 0);
+        }
+    }
+    public int Health
+    {
+        get;
+        set
+        {
             field = Math.Max(0, value);
-            if (field <= 0 && Name!.Contains(empt)) Name += empt;
         }
     }
 
     public override string ToString()
     {
-        return base.ToString() + $"Health Gain: {HealthGain}";
+        return $"Potion named {Name} worth {Value}";
     }
 }

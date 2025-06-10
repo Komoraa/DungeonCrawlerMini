@@ -2,5 +2,6 @@
 
 public interface IPotion : IItem
 {
-    public int HealthGain { get; set; }
+    public int MaxHealth { get; set; }
+    public int Health { get; set; }
 }

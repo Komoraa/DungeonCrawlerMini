@@ -48,18 +48,7 @@ public class Dungeon : IDungeon, IEquatable<Dungeon>
 
     public override string ToString()
     {
-        var connectionMap = from kvp in ConnectionMap
-                            let rc = string.Join(", ", from r in kvp.Value select r.Name)
-                            select $"[{kvp.Key}: [{rc}]]";
-        return $"{Name}, Description: {Description} Rooms: [{string.Join(", ", Rooms)}], Connection Map: [{string.Join(", ", connectionMap)}]";
-    }
-    public override int GetHashCode()
-    {
-        return ToString().GetHashCode();
-    }
-    public override bool Equals(object? obj)
-    {
-        return ToString().Equals(obj?.ToString());
+        return $"Dungeon named {Name}";
     }
 
     public bool Equals(Dungeon? other)

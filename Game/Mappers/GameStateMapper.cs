@@ -9,8 +9,8 @@ public static class GameStateMapper
     {
         return new GameStateDto
         {
-            Player = state.Player!.ToDto(),
-            Dungeon = state.Dungeon!.ToDto(),
+            Player = state.Player?.ToDto(),
+            Dungeon = state.Dungeon?.ToDto(),
             CurrentRoom = state.CurrentRoom!.Id,
             VisitedRooms = [.. from room in state.VisitedRooms select room.Id]
         };

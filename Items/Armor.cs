@@ -12,6 +12,6 @@ public class Armor : Item, IArmor
 
     public override string ToString()
     {
-        return $"{base.ToString} AC: {ArmorClass}, Dexterity Cap: {DexterityCap?.ToString() ?? "None"}, Speed Adjustment: {SpeedAdjustment}";
+        return $"Armor named {Name} worth {Value}";
     }
 }

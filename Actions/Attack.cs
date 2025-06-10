@@ -37,6 +37,11 @@ public class Attack : IAttack, IEquatable<Attack>
         Roll();
     }
 
+    public override string ToString()
+    {
+        return $"{Name} (Atk: {AttackRoll}, Dmg: {DamageRoll})";
+    }
+
     public bool Equals(Attack? other)
     {
         return Id == other?.Id;

@@ -5,14 +5,16 @@ namespace UI.WinForms.Forms;
 
 public partial class MainForm : Form
 {
+    private GameStateDto? _save;
+
     public MainForm()
     {
         InitializeComponent();
     }
 
-    private void SetUpGame(GameStateDto? dto = null)
+    private void ButtonPlay_Click(object sender, EventArgs e)
     {
-        var game = new GameForm(dto);
+        var game = new GameForm(_save);
         game.Show();
         game.FormClosed += delegate
         {
@@ -21,11 +23,27 @@ public partial class MainForm : Form
         Hide();
     }
 
-    private void ButtonContinue_Click(object sender, EventArgs e)
+    private void LoadSave(string filePath)
     {
-        using var openFileDialog = new OpenFileDialog()
+        const string messageCorruptedFile = "Corrupted Save Data!";
+
+        string content = File.ReadAllText(filePath);
+
+        var data = JsonSerializer.Deserialize<GameStateDto>(content) ?? throw new Exception(messageCorruptedFile);
+
+        if (data.Player is null) throw new Exception(messageCorruptedFile);
+        if (data.Dungeon is null) throw new Exception(messageCorruptedFile);
+        if (data.CurrentRoom.Equals(0)) throw new Exception(messageCorruptedFile);
+        if (data.VisitedRooms.Count == 0) throw new Exception(messageCorruptedFile);
+
+        _save = data;
+    }
+
+    private void ButtonLoadSave_Click(object sender, EventArgs e)
+    {
+        using var openFileDialog = new OpenFileDialog
         {
-            Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*",
+            Filter = "JSON files (*.json)|*.json",
             Title = "Load a Save File"
         };
 
@@ -34,11 +52,10 @@ public partial class MainForm : Form
             try
             {
                 string filePath = openFileDialog.FileName;
-                string jsonContent = File.ReadAllText(filePath);
+                
+                LoadSave(filePath);
 
-                var data = JsonSerializer.Deserialize<GameStateDto>(jsonContent);
-
-                SetUpGame(data);
+                ButtonPlay.Text = "Continue";
             }
             catch (Exception ex)
             {
@@ -52,8 +69,8 @@ public partial class MainForm : Form
         }
     }
 
-    private void ButtonNewGame_Click(object sender, EventArgs e)
+    private void ButtonExit_Click(object sender, EventArgs e)
     {
-        SetUpGame();
+        Close();
     }
 }
