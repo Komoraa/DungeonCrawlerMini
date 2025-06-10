@@ -20,11 +20,21 @@ public static class CharacterMapper
             Dexterity = character.Dexterity,
             Intelligence = character.Intelligence,
             Perception = character.Perception,
-            MaxHealthBase = character.MaxHealthBase,
-            MaxHealthPerLevel = character.MaxHealthPerLevel,
-            MaxHealth = character.MaxHealth,
+            MaxHealthBase = character.maxHealthBase,
+            MaxHealthPerLevel = character.maxHealthPerLevel,
             Health = character.Health,
-            Inventory = [.. from item in character.Inventory select ((Item)item).ToDto()],
+            InventoryWeapons = [.. from item in character.Inventory
+                                   where item is Weapon
+                                   select ((Weapon)item).ToDto()],
+            InventoryArmors = [.. from item in character.Inventory
+                                  where item is Armor
+                                  select ((Armor)item).ToDto()],
+            InventoryPotions = [.. from item in character.Inventory
+                                   where item is Potion
+                                   select ((Potion)item).ToDto()],
+            InventoryOther = [.. from item in character.Inventory
+                                 where item is not Weapon && item is not Armor && item is not Potion
+                                 select ((Item)item).ToDto()],
             Money = character.Money.ToDto(),
             InnateAttacks = [.. from attack in character.InnateAttacks select ((Attack)attack).ToDto()]
         };
@@ -48,17 +58,19 @@ public static class CharacterMapper
             Dexterity = dto.Dexterity,
             Intelligence = dto.Intelligence,
             Perception = dto.Perception,
-            MaxHealthBase = dto.MaxHealthBase,
-            MaxHealthPerLevel = dto.MaxHealthPerLevel,
-            MaxHealth = dto.MaxHealth,
+            maxHealthBase = dto.MaxHealthBase,
+            maxHealthPerLevel = dto.MaxHealthPerLevel,
             Health = dto.Health,
             Money = dto.Money.ToEntity(),
+            Weapon = dto.Weapon?.ToEntity(),
+            Armor = dto.Armor?.ToEntity()
         };
 
-        if (dto.Weapon is not null) character.Weapon = dto.Weapon.ToEntity();
-        if (dto.Armor is not null) character.Armor = dto.Armor.ToEntity();
+        foreach (var item in dto.InventoryWeapons) character.TryPickUp(item.ToEntity());
+        foreach (var item in dto.InventoryArmors) character.TryPickUp(item.ToEntity());
+        foreach (var item in dto.InventoryPotions) character.TryPickUp(item.ToEntity());
+        foreach (var item in dto.InventoryOther) character.TryPickUp(item.ToEntity());
 
-        foreach (var item in dto.Inventory) character.TryPickUp(item.ToEntity());
         foreach (var attack in dto.InnateAttacks) character.TryAddInnate(attack.ToEntity());
 
         return character;

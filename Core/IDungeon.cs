@@ -2,9 +2,9 @@
 
 public interface IDungeon
 {
-    Guid Id { get; }
-    string? Name { get; }
-    string? Description { get; }
+    Guid Id { get; set; }
+    string? Name { get; set; }
+    string? Description { get; set; }
 
     IReadOnlyList<IRoom> Rooms { get; }
     IReadOnlyDictionary<IRoom, IReadOnlyList<IRoom>> ConnectionMap { get; }

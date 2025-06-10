@@ -3,7 +3,7 @@ using Core.Structs;
 
 namespace Items
 {
-    public class Item : IItem
+    public class Item : IItem, IEquatable<Item>
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string? Name
@@ -28,15 +28,20 @@ namespace Items
 
         public override string ToString()
         {
-            return $"{Name}, Worth: {Value}, Description: {Description}";
+            return $"Item named {Name} worth {Value}";
         }
-        public override int GetHashCode()
+
+        public bool Equals(Item? other)
         {
-            return ToString().GetHashCode();
+            return Id == other?.Id;
         }
-        public override bool Equals(object? obj)
+        public static bool operator ==(Item left, Item right)
         {
-            return ToString().Equals(obj?.ToString());
+            return left.Id == right.Id;
+        }
+        public static bool operator !=(Item left, Item right)
+        {
+            return left.Id != right.Id;
         }
     }
 }

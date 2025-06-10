@@ -3,7 +3,7 @@ using Core.Structs;
 
 namespace Actions;
 
-public class Attack : IAttack
+public class Attack : IAttack, IEquatable<Attack>
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string? Name
@@ -35,6 +35,24 @@ public class Attack : IAttack
         AttackRoll = attackRoll;
         DamageRoll = damageRoll;
         Roll();
+    }
+
+    public override string ToString()
+    {
+        return $"{Name} (Atk: {AttackRoll}, Dmg: {DamageRoll})";
+    }
+
+    public bool Equals(Attack? other)
+    {
+        return Id == other?.Id;
+    }
+    public static bool operator ==(Attack left, Attack right)
+    {
+        return left.Id == right.Id;
+    }
+    public static bool operator !=(Attack left, Attack right)
+    {
+        return left.Id != right.Id;
     }
 
     public void Roll()

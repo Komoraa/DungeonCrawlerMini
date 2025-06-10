@@ -3,7 +3,7 @@ using Dungeons.Exceptions;
 
 namespace Dungeons;
 
-public class Dungeon : IDungeon
+public class Dungeon : IDungeon, IEquatable<Dungeon>
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string? Name
@@ -48,18 +48,20 @@ public class Dungeon : IDungeon
 
     public override string ToString()
     {
-        var connectionMap = from kvp in ConnectionMap
-                            let rc = string.Join(", ", from r in kvp.Value select r.Name)
-                            select $"[{kvp.Key}: [{rc}]]";
-        return $"{Name}, Description: {Description} Rooms: [{string.Join(", ", Rooms)}], Connection Map: [{string.Join(", ", connectionMap)}]";
+        return $"{Name}";
     }
-    public override int GetHashCode()
+
+    public bool Equals(Dungeon? other)
     {
-        return ToString().GetHashCode();
+        return Id == other?.Id;
     }
-    public override bool Equals(object? obj)
+    public static bool operator ==(Dungeon left, Dungeon right)
     {
-        return ToString().Equals(obj?.ToString());
+        return left.Id == right.Id;
+    }
+    public static bool operator !=(Dungeon left, Dungeon right)
+    {
+        return left.Id != right.Id;
     }
 
     public bool Has(IRoom room)

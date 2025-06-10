@@ -4,7 +4,7 @@ using Core.Structs;
 
 namespace Characters;
 
-public class Character : ICharacter
+public class Character : ICharacter, IEquatable<Character>
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string? Name
@@ -60,18 +60,13 @@ public class Character : ICharacter
     public int Intelligence { get; set; }
     public int Perception { get; set; }
 
-    public int MaxHealthBase { get; set; }
-    public int MaxHealthPerLevel { get; set; }
+    public int maxHealthBase = 10;
+    public int maxHealthPerLevel = 10;
     public int MaxHealth
     {
-        get;
-        set
+        get
         {
-            field = Math.Max(value, 0);
-            if (Health > field)
-            {
-                Health = field;
-            }
+            return maxHealthBase + Level * maxHealthPerLevel;
         }
     }
     public int Health
@@ -157,13 +152,6 @@ public class Character : ICharacter
         }
     }
 
-    public event EventHandler? OnInit = delegate (object? sender, EventArgs e)
-    {
-        if (sender is Character character)
-        {
-            character.Level = 1;
-        }
-    };
     public event EventHandler? OnLevelUp = delegate (object? sender, EventArgs e)
     {
         if (sender is Character character)
@@ -175,23 +163,20 @@ public class Character : ICharacter
 
     public override string ToString()
     {
-        return $"{Name}, {GetType().Name} {Level} (XP: {Experience}/{ExperienceToNextLevel}), HP: {Health}/{MaxHealth}, AC: {ArmorClass}, " +
-            $"Str: {Strength}, Dex: {Dexterity}, Int: {Intelligence}, Per: {Perception}, " +
-            $"Money: {Money}, Speed: {Speed}, " +
-            $"Weapon: {Weapon?.Name ?? "None"}, Armor: {Armor?.Name ?? "None"}";
-    }
-    public override int GetHashCode()
-    {
-        return ToString().GetHashCode();
-    }
-    public override bool Equals(object? obj)
-    {
-        return ToString().Equals(obj?.ToString());
+        return $"Character named {Name}";
     }
 
-    public void Init()
+    public bool Equals(Character? other)
     {
-        OnInit?.Invoke(this, EventArgs.Empty);
+        return Id == other?.Id;
+    }
+    public static bool operator ==(Character left, Character right)
+    {
+        return left.Id == right.Id;
+    }
+    public static bool operator !=(Character left, Character right)
+    {
+        return left.Id != right.Id;
     }
 
     public void LevelUp()
@@ -350,6 +335,39 @@ public class Character : ICharacter
             return false;
         }
     }
+    public void Use(IItem item)
+    {
+        if (!Has(item))
+        {
+            throw new ItemNotInInventoryException(this, item);
+        }
+        if (item is not IPotion potion)
+        {
+            throw new ItemNotUsableException(this, item);
+        }
+
+        var missingHealth = MaxHealth - Health;
+        var healAmount = Math.Min(potion.Health, missingHealth);
+
+        Health += healAmount;
+        potion.Health -= healAmount;
+    }
+    public bool TryUse(IItem item)
+    {
+        try
+        {
+            Use(item);
+            return true;
+        }
+        catch (ItemNotInInventoryException)
+        {
+            return false;
+        }
+        catch (ItemNotUsableException)
+        {
+            return false;
+        }
+    }
 
     public bool Has(IAttack attack)
     {
@@ -404,6 +422,16 @@ public class Character : ICharacter
         if (!Has(attack))
         {
             throw new AttackNotAvailableException(this, attack);
+        }
+        if (attack.AttackRoll is AttackRoll atkRoll)
+        {
+            atkRoll.Base = Strength;
+            attack.AttackRoll = atkRoll;
+        }
+        if (attack.DamageRoll is DamageRoll dmgRoll)
+        {
+            dmgRoll.Base = Strength;
+            attack.DamageRoll = dmgRoll;
         }
 
         attack.Roll();

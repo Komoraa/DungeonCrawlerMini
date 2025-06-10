@@ -2,9 +2,11 @@
 
 public interface IRoom
 {
-    Guid Id { get; }
-    string? Name { get; }
-    string? Description { get; }
+    Guid Id { get; set; }
+    string? Name { get; set; }
+    string? Description { get; set; }
+
+    bool Visited { get; set; }
 
     IReadOnlyList<ICharacter> Enemies { get; }
     IReadOnlyList<IItem> Items { get; }

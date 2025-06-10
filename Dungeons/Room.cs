@@ -3,7 +3,7 @@ using Dungeons.Exceptions;
 
 namespace Dungeons;
 
-public class Room : IRoom
+public class Room : IRoom, IEquatable<Room>
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string? Name
@@ -22,6 +22,8 @@ public class Room : IRoom
             field = value ?? nameof(Room);
         }
     } = nameof(Room);
+
+    public bool Visited { get; set; }
 
     protected List<ICharacter> _enemies = [];
     public IReadOnlyList<ICharacter> Enemies
@@ -43,17 +45,35 @@ public class Room : IRoom
 
     public override string ToString()
     {
-        string items = string.Join(", ", from item in Items orderby item.Name select item.Name);
-        string characters = string.Join(", ", from character in Enemies orderby character.Name select character.Name);
-        return $"{Name}, Description: {Description}, Enemies: [{characters}], Items: [{items}]";
+        string enemyCount;
+        if (Enemies.Count == 1) enemyCount = "1 Enemy";
+        else enemyCount = $"{Enemies.Count} Enemies";
+
+        string output = $"{Name} ({enemyCount})";
+        if (Visited) output += " (Visited)";
+
+        return output;
     }
     public override int GetHashCode()
     {
-        return ToString().GetHashCode();
+        return base.GetHashCode();
     }
     public override bool Equals(object? obj)
     {
-        return ToString().Equals(obj?.ToString());
+        return ReferenceEquals(this, obj);
+    }
+
+    public bool Equals(Room? other)
+    {
+        return Id == other?.Id;
+    }
+    public static bool operator ==(Room left, Room right)
+    {
+        return left.Id == right.Id;
+    }
+    public static bool operator !=(Room left, Room right)
+    {
+        return left.Id != right.Id;
     }
 
     public bool Has(IItem item)
