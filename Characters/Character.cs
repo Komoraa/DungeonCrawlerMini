@@ -60,16 +60,13 @@ public class Character : ICharacter, IEquatable<Character>
     public int Intelligence { get; set; }
     public int Perception { get; set; }
 
+    public int maxHealthBase = 10;
+    public int maxHealthPerLevel = 10;
     public int MaxHealth
     {
-        get;
-        set
+        get
         {
-            field = Math.Max(value, 1);
-            if (Health > field)
-            {
-                Health = field;
-            }
+            return maxHealthBase + Level * maxHealthPerLevel;
         }
     }
     public int Health

@@ -1,9 +1,24 @@
-﻿using Characters;
+﻿using Actions;
+using Characters;
 
 namespace Game.Generators;
 
 public static class CharacterGenerator
 {
+    private static readonly Random random = new();
+
+    private static readonly string[] EnemyNames = [
+        "Gloomfang", "Skulker", "Razorclaw", "Dreadmaw", "Venomspike",
+        "Ashwalker", "Blightbeast", "Frostgnarl", "Gravetide", "Snarlhorn",
+        "Bloodroot", "Shiversoul", "Nightgleam", "Wretch", "Hollowfang",
+        "Spiteshade", "Gnash", "Thornback", "Murkfiend", "Scalebane"
+    ];
+
+    private static string GetRandomEnemyName()
+    {
+        return EnemyNames[random.Next(EnemyNames.Length)];
+    }
+
     public static Character GeneratePlayer()
     {
         var player = new Character
@@ -17,12 +32,13 @@ public static class CharacterGenerator
             Intelligence = 2,
             Perception = 4,
 
-            MaxHealth = 50,
-            Health = 50,
+            maxHealthBase = 20,
+            maxHealthPerLevel = 10,
 
             Money = new(0, 10, 5, 2),
 
-            Speed = 25
+            Speed = 25,
+            Health = 30
         };
 
         foreach (var attack in ActionGenerator.GenerateInnatePlayer())
@@ -37,10 +53,33 @@ public static class CharacterGenerator
         return player;
     }
 
-    public static List<Character> GenerateEnemies(params string[] names)
+    public static Character GenerateEnemy()
     {
-        List<Character> enemies = [];
+        var enemy = new Character
+        {
+            Name = GetRandomEnemyName(),
+            Level = 1,
+            Experience = random.Next(300),
 
-        return enemies;
+            Strength = 2,
+            Dexterity = 2,
+            Intelligence = 2,
+            Perception = 2,
+
+            maxHealthBase = 10,
+            maxHealthPerLevel = 10,
+
+            Money = new(0, 0, 3, 0),
+
+            Speed = 25,
+            Health = 20
+        };
+
+        if (random.NextDouble() < 0.3) enemy.Weapon = ItemGenerator.GenerateWeapon();
+        if (random.NextDouble() < 0.3) enemy.Armor = ItemGenerator.GenerateArmor();
+
+        foreach (var attack in ActionGenerator.GenerateInnateEnemy()) enemy.TryAddInnate(attack);
+
+        return enemy;
     }
 }

@@ -32,6 +32,8 @@
             ListBoxItems = new ListBox();
             GroupBoxEnemies = new GroupBox();
             GroupBoxItems = new GroupBox();
+            ButtonItemInspect = new Button();
+            ButtonItemPickUp = new Button();
             GroupBoxRooms = new GroupBox();
             ListBoxRooms = new ListBox();
             ButtonBack = new Button();
@@ -54,13 +56,13 @@
             ListBoxItems.FormattingEnabled = true;
             ListBoxItems.Location = new Point(6, 22);
             ListBoxItems.Name = "ListBoxItems";
-            ListBoxItems.Size = new Size(188, 124);
+            ListBoxItems.Size = new Size(394, 124);
             ListBoxItems.TabIndex = 1;
             // 
             // GroupBoxEnemies
             // 
             GroupBoxEnemies.Controls.Add(ListBoxEnemies);
-            GroupBoxEnemies.Location = new Point(12, 41);
+            GroupBoxEnemies.Location = new Point(218, 41);
             GroupBoxEnemies.Name = "GroupBoxEnemies";
             GroupBoxEnemies.Size = new Size(200, 158);
             GroupBoxEnemies.TabIndex = 2;
@@ -69,18 +71,40 @@
             // 
             // GroupBoxItems
             // 
+            GroupBoxItems.Controls.Add(ButtonItemInspect);
+            GroupBoxItems.Controls.Add(ButtonItemPickUp);
             GroupBoxItems.Controls.Add(ListBoxItems);
-            GroupBoxItems.Location = new Point(218, 41);
+            GroupBoxItems.Location = new Point(12, 205);
             GroupBoxItems.Name = "GroupBoxItems";
-            GroupBoxItems.Size = new Size(200, 158);
+            GroupBoxItems.Size = new Size(406, 184);
             GroupBoxItems.TabIndex = 3;
             GroupBoxItems.TabStop = false;
             GroupBoxItems.Text = "Items";
             // 
+            // ButtonItemInspect
+            // 
+            ButtonItemInspect.Location = new Point(87, 152);
+            ButtonItemInspect.Name = "ButtonItemInspect";
+            ButtonItemInspect.Size = new Size(75, 23);
+            ButtonItemInspect.TabIndex = 3;
+            ButtonItemInspect.Text = "Inspect";
+            ButtonItemInspect.UseVisualStyleBackColor = true;
+            ButtonItemInspect.Click += ButtonItemInspect_Click;
+            // 
+            // ButtonItemPickUp
+            // 
+            ButtonItemPickUp.Location = new Point(6, 152);
+            ButtonItemPickUp.Name = "ButtonItemPickUp";
+            ButtonItemPickUp.Size = new Size(75, 23);
+            ButtonItemPickUp.TabIndex = 2;
+            ButtonItemPickUp.Text = "Pick Up";
+            ButtonItemPickUp.UseVisualStyleBackColor = true;
+            ButtonItemPickUp.Click += ButtonItemPickUp_Click;
+            // 
             // GroupBoxRooms
             // 
             GroupBoxRooms.Controls.Add(ListBoxRooms);
-            GroupBoxRooms.Location = new Point(424, 41);
+            GroupBoxRooms.Location = new Point(12, 41);
             GroupBoxRooms.Name = "GroupBoxRooms";
             GroupBoxRooms.Size = new Size(200, 158);
             GroupBoxRooms.TabIndex = 4;
@@ -97,7 +121,7 @@
             // 
             // ButtonBack
             // 
-            ButtonBack.Location = new Point(12, 205);
+            ButtonBack.Location = new Point(12, 395);
             ButtonBack.Name = "ButtonBack";
             ButtonBack.Size = new Size(75, 23);
             ButtonBack.TabIndex = 5;
@@ -109,6 +133,7 @@
             // 
             TextBoxName.Location = new Point(12, 12);
             TextBoxName.Name = "TextBoxName";
+            TextBoxName.ReadOnly = true;
             TextBoxName.Size = new Size(120, 23);
             TextBoxName.TabIndex = 6;
             // 
@@ -116,7 +141,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(637, 240);
+            ClientSize = new Size(444, 434);
             Controls.Add(TextBoxName);
             Controls.Add(ButtonBack);
             Controls.Add(GroupBoxRooms);
@@ -143,5 +168,7 @@
         private ListBox ListBoxRooms;
         private Button ButtonBack;
         private TextBox TextBoxName;
+        private Button ButtonItemInspect;
+        private Button ButtonItemPickUp;
     }
 }

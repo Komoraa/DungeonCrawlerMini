@@ -86,6 +86,8 @@ public partial class CombatForm : Form
         }
         else
         {
+            _state.Player!.GrantExperience(_enemy.Experience / 10);
+            foreach (var item in _enemy.Inventory) _state.Player!.TryPickUp(item);
             Close();
         }
     }

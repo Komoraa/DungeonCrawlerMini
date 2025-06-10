@@ -16,7 +16,6 @@ public class CharacterDto
 
     public int MaxHealthBase { get; set; }
     public int MaxHealthPerLevel { get; set; }
-    public int MaxHealth { get; set; }
     public int Health { get; set; }
 
     public List<WeaponDto> InventoryWeapons { get; set; } = [];

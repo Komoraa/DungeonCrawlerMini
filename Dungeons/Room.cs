@@ -45,8 +45,22 @@ public class Room : IRoom, IEquatable<Room>
 
     public override string ToString()
     {
-        if (Visited) return $"{Name} (Visited)";
-        return $"{Name}";
+        string enemyCount;
+        if (Enemies.Count == 1) enemyCount = "1 Enemy";
+        else enemyCount = $"{Enemies.Count} Enemies";
+
+        string output = $"{Name} ({enemyCount})";
+        if (Visited) output += " (Visited)";
+
+        return output;
+    }
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
+    }
+    public override bool Equals(object? obj)
+    {
+        return ReferenceEquals(this, obj);
     }
 
     public bool Equals(Room? other)

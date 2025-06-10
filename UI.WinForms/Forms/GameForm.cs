@@ -18,6 +18,16 @@ public partial class GameForm : Form
         else game = new(dto.ToEntity());
     }
 
+    private void Reload()
+    {
+        game.State.CurrentRoom!.Visited = true;
+    }
+
+    private void GameForm_Load(object sender, EventArgs e)
+    {
+        Reload();
+    }
+
     private void ButtonInventory_Click(object sender, EventArgs e)
     {
         var form = new CharacterSheetForm(game.State);
@@ -25,6 +35,7 @@ public partial class GameForm : Form
         form.FormClosed += delegate
         {
             Show();
+            Reload();
         };
         Hide();
     }
@@ -36,6 +47,7 @@ public partial class GameForm : Form
         form.FormClosed += delegate
         {
             Show();
+            Reload();
         };
         Hide();
     }
@@ -47,6 +59,7 @@ public partial class GameForm : Form
         form.FormClosed += delegate
         {
             Show();
+            Reload();
         };
         Hide();
     }
@@ -58,6 +71,7 @@ public partial class GameForm : Form
         form.FormClosed += delegate
         {
             Show();
+            Reload();
         };
         Hide();
     }
@@ -71,17 +85,19 @@ public partial class GameForm : Form
 
     private void ButtonSave_Click(object sender, EventArgs e)
     {
-        using var openFileDialog = new OpenFileDialog
+        using var saveFileDialog = new SaveFileDialog
         {
             Filter = "JSON files (*.json)|*.json",
-            Title = "Save to a File"
+            Title = "Save to a File",
+            DefaultExt = "json",
+            AddExtension = true
         };
 
-        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        if (saveFileDialog.ShowDialog() == DialogResult.OK)
         {
             try
             {
-                string filePath = openFileDialog.FileName;
+                string filePath = saveFileDialog.FileName;
 
                 Save(filePath);
             }

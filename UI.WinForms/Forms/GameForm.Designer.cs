@@ -110,6 +110,7 @@
             Name = "GameForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dungeon Crawler";
+            Load += GameForm_Load;
             ResumeLayout(false);
         }
 

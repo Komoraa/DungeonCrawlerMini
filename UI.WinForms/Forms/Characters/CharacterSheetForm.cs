@@ -28,6 +28,9 @@ public partial class CharacterSheetForm : Form
 
         ProgressBarHealth.Value = 100 * player.Health / player.MaxHealth;
 
+        TextBoxLevel.Text = $"{player.Level}";
+        ProgressBarExperience.Value = 100 * player.Experience / player.ExperienceToNextLevel;
+
         TextBoxWeapon.Text = player.Weapon is null ? "None" : player.Weapon.Name;
         TextBoxArmor.Text = player.Armor is null ? "None" : player.Armor.Name;
         TextBoxAC.Text = $"{player.ArmorClass}";
@@ -136,8 +139,7 @@ public partial class CharacterSheetForm : Form
     private void ButtonDrop_Click(object sender, EventArgs e)
     {
         var item = ListBoxInventory.SelectedItem as Item;
-        _state.Player!.TryDrop(item!);
-        _state.CurrentRoom!.TryAdd(item!);
+        if (_state.Player!.TryDrop(item!)) _state.CurrentRoom!.TryAdd(item!);
         ReloadInventory();
     }
 

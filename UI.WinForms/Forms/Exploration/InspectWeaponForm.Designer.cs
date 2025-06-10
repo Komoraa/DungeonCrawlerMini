@@ -79,7 +79,7 @@
             ListBoxAttacks.FormattingEnabled = true;
             ListBoxAttacks.Location = new Point(186, 85);
             ListBoxAttacks.Name = "ListBoxAttacks";
-            ListBoxAttacks.Size = new Size(186, 139);
+            ListBoxAttacks.Size = new Size(286, 139);
             ListBoxAttacks.TabIndex = 16;
             // 
             // LabelAttacks
@@ -112,7 +112,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(384, 265);
+            ClientSize = new Size(484, 265);
             Controls.Add(TextBoxValue);
             Controls.Add(LabelValue);
             Controls.Add(LabelAttacks);

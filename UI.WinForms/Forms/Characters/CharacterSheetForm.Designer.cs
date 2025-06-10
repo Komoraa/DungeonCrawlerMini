@@ -54,6 +54,10 @@
             TextBoxSP = new TextBox();
             TextBoxCP = new TextBox();
             ButtonBack = new Button();
+            ProgressBarExperience = new ProgressBar();
+            LabelLevel = new Label();
+            LavelExperience = new Label();
+            TextBoxLevel = new TextBox();
             GroupBoxGeneral.SuspendLayout();
             GroupBoxInventory.SuspendLayout();
             SuspendLayout();
@@ -92,6 +96,10 @@
             // 
             // GroupBoxGeneral
             // 
+            GroupBoxGeneral.Controls.Add(ProgressBarExperience);
+            GroupBoxGeneral.Controls.Add(LavelExperience);
+            GroupBoxGeneral.Controls.Add(TextBoxLevel);
+            GroupBoxGeneral.Controls.Add(LabelLevel);
             GroupBoxGeneral.Controls.Add(TextBoxAC);
             GroupBoxGeneral.Controls.Add(LabelAC);
             GroupBoxGeneral.Controls.Add(LabelDescription);
@@ -105,14 +113,14 @@
             GroupBoxGeneral.Controls.Add(LabelHealth);
             GroupBoxGeneral.Location = new Point(12, 12);
             GroupBoxGeneral.Name = "GroupBoxGeneral";
-            GroupBoxGeneral.Size = new Size(200, 309);
+            GroupBoxGeneral.Size = new Size(200, 368);
             GroupBoxGeneral.TabIndex = 4;
             GroupBoxGeneral.TabStop = false;
             GroupBoxGeneral.Text = "General Information";
             // 
             // TextBoxAC
             // 
-            TextBoxAC.Location = new Point(63, 139);
+            TextBoxAC.Location = new Point(63, 196);
             TextBoxAC.Name = "TextBoxAC";
             TextBoxAC.ReadOnly = true;
             TextBoxAC.Size = new Size(100, 23);
@@ -121,7 +129,7 @@
             // LabelAC
             // 
             LabelAC.AutoSize = true;
-            LabelAC.Location = new Point(6, 142);
+            LabelAC.Location = new Point(7, 199);
             LabelAC.Name = "LabelAC";
             LabelAC.Size = new Size(23, 15);
             LabelAC.TabIndex = 9;
@@ -130,7 +138,7 @@
             // LabelDescription
             // 
             LabelDescription.AutoSize = true;
-            LabelDescription.Location = new Point(6, 165);
+            LabelDescription.Location = new Point(6, 222);
             LabelDescription.Name = "LabelDescription";
             LabelDescription.Size = new Size(67, 15);
             LabelDescription.TabIndex = 8;
@@ -138,7 +146,7 @@
             // 
             // RichTextBoxDescription
             // 
-            RichTextBoxDescription.Location = new Point(6, 183);
+            RichTextBoxDescription.Location = new Point(6, 240);
             RichTextBoxDescription.Name = "RichTextBoxDescription";
             RichTextBoxDescription.Size = new Size(188, 120);
             RichTextBoxDescription.TabIndex = 7;
@@ -146,7 +154,7 @@
             // 
             // TextBoxArmor
             // 
-            TextBoxArmor.Location = new Point(63, 109);
+            TextBoxArmor.Location = new Point(63, 167);
             TextBoxArmor.Name = "TextBoxArmor";
             TextBoxArmor.ReadOnly = true;
             TextBoxArmor.Size = new Size(100, 23);
@@ -154,7 +162,7 @@
             // 
             // TextBoxWeapon
             // 
-            TextBoxWeapon.Location = new Point(63, 80);
+            TextBoxWeapon.Location = new Point(63, 138);
             TextBoxWeapon.Name = "TextBoxWeapon";
             TextBoxWeapon.ReadOnly = true;
             TextBoxWeapon.Size = new Size(100, 23);
@@ -163,7 +171,7 @@
             // LabelArmor
             // 
             LabelArmor.AutoSize = true;
-            LabelArmor.Location = new Point(6, 112);
+            LabelArmor.Location = new Point(7, 170);
             LabelArmor.Name = "LabelArmor";
             LabelArmor.Size = new Size(41, 15);
             LabelArmor.TabIndex = 4;
@@ -172,7 +180,7 @@
             // LabelWeapon
             // 
             LabelWeapon.AutoSize = true;
-            LabelWeapon.Location = new Point(6, 83);
+            LabelWeapon.Location = new Point(6, 141);
             LabelWeapon.Name = "LabelWeapon";
             LabelWeapon.Size = new Size(51, 15);
             LabelWeapon.TabIndex = 3;
@@ -299,7 +307,7 @@
             // 
             // ButtonBack
             // 
-            ButtonBack.Location = new Point(12, 327);
+            ButtonBack.Location = new Point(12, 386);
             ButtonBack.Name = "ButtonBack";
             ButtonBack.Size = new Size(75, 23);
             ButtonBack.TabIndex = 6;
@@ -307,11 +315,44 @@
             ButtonBack.UseVisualStyleBackColor = true;
             ButtonBack.Click += ButtonBack_Click;
             // 
+            // ProgressBarExperience
+            // 
+            ProgressBarExperience.Location = new Point(63, 109);
+            ProgressBarExperience.Name = "ProgressBarExperience";
+            ProgressBarExperience.Size = new Size(100, 23);
+            ProgressBarExperience.TabIndex = 7;
+            // 
+            // LabelLevel
+            // 
+            LabelLevel.AutoSize = true;
+            LabelLevel.Location = new Point(6, 83);
+            LabelLevel.Name = "LabelLevel";
+            LabelLevel.Size = new Size(34, 15);
+            LabelLevel.TabIndex = 8;
+            LabelLevel.Text = "Level";
+            // 
+            // LavelExperience
+            // 
+            LavelExperience.AutoSize = true;
+            LavelExperience.Location = new Point(6, 112);
+            LavelExperience.Name = "LavelExperience";
+            LavelExperience.Size = new Size(21, 15);
+            LavelExperience.TabIndex = 9;
+            LavelExperience.Text = "XP";
+            // 
+            // TextBoxLevel
+            // 
+            TextBoxLevel.Location = new Point(63, 80);
+            TextBoxLevel.Name = "TextBoxLevel";
+            TextBoxLevel.ReadOnly = true;
+            TextBoxLevel.Size = new Size(100, 23);
+            TextBoxLevel.TabIndex = 10;
+            // 
             // CharacterSheetForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(564, 361);
+            ClientSize = new Size(564, 425);
             Controls.Add(ButtonBack);
             Controls.Add(GroupBoxInventory);
             Controls.Add(GroupBoxGeneral);
@@ -354,5 +395,9 @@
         private RichTextBox RichTextBoxDescription;
         private TextBox TextBoxAC;
         private Label LabelAC;
+        private ProgressBar ProgressBarExperience;
+        private Label LavelExperience;
+        private TextBox TextBoxLevel;
+        private Label LabelLevel;
     }
 }

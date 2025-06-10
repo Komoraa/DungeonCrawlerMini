@@ -20,7 +20,8 @@ public static class CharacterMapper
             Dexterity = character.Dexterity,
             Intelligence = character.Intelligence,
             Perception = character.Perception,
-            MaxHealth = character.MaxHealth,
+            MaxHealthBase = character.maxHealthBase,
+            MaxHealthPerLevel = character.maxHealthPerLevel,
             Health = character.Health,
             InventoryWeapons = [.. from item in character.Inventory
                                    where item is Weapon
@@ -57,7 +58,8 @@ public static class CharacterMapper
             Dexterity = dto.Dexterity,
             Intelligence = dto.Intelligence,
             Perception = dto.Perception,
-            MaxHealth = dto.MaxHealth,
+            maxHealthBase = dto.MaxHealthBase,
+            maxHealthPerLevel = dto.MaxHealthPerLevel,
             Health = dto.Health,
             Money = dto.Money.ToEntity(),
             Weapon = dto.Weapon?.ToEntity(),
